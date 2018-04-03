@@ -32,7 +32,8 @@ class AudioManager {
         let sound = this.sounds[name];
         try {
           await sound.setPositionAsync(0);
-          await sound.playAsync(); //This works, but just only once!
+          await sound.playAsync();
+          console.log("sound played");
         }
         catch (error) {
          console.log('play sound error: ', error);

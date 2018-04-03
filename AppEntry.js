@@ -4,6 +4,7 @@ import configureStore from './src/state/configureStore';
 import App from './src/App';
 import { KeepAwake, registerRootComponent, Font } from 'expo';
 import { View } from 'react-native';
+import AdManager from 'assets/AdManager';
 
 if (__DEV__) {
   KeepAwake.activate();
@@ -24,13 +25,17 @@ export default class AppEntry extends Component {
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
     });
     this.setState({ isFontLoaded: true });
+    
+    AdManager.init();
+    AdManager.setAdFree(false);
   }
   
   render() {
+    const { isAdManagerLoaded, isFontLoaded } = this.state;
     return (
       <Provider store={store}>
         <View style={{flexGrow: 1}}>
-          { this.state.isFontLoaded && <App /> }
+          { isFontLoaded && <App /> }
         </View>
       </Provider>
       
